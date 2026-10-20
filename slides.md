@@ -1,11 +1,10 @@
 ---
 # try also 'default' to start simple
 theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
+colorSchema: light
+layout: lava-cover
 # some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: Langgraph
 info: |
   ## Slidev Starter Template
   Presentation slides for developers.
@@ -24,13 +23,11 @@ comark: true
 duration: 35min
 ---
 
-# Welcome to Slidev
+# LangGraph
 
-Presentation slides for developers
+by Nataly Jaya 
 
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
-</div>
+
 
 <div class="abs-br m-6 text-xl">
   <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="slidev-icon-btn">
@@ -46,30 +43,16 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
+layout: blank
 transition: fade-out
 ---
 
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
 Learn more: https://sli.dev/features/slide-scope-style
 -->
-
+<AntrophicArchitecture />
 <style>
 h1 {
   background-color: #2B90B6;
@@ -118,6 +101,8 @@ layout: two-cols
 layoutClass: gap-16
 ---
 
+<LavaBackground />
+
 # Table of contents
 
 You can use the `Toc` component to generate a table of contents for your slides:
@@ -136,6 +121,8 @@ The title will be inferred from your slide content, or you can override it with 
 layout: image-right
 image: https://cover.sli.dev
 ---
+
+<LavaBackground />
 
 # Code
 
@@ -654,6 +641,8 @@ console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-
 layout: center
 class: text-center
 ---
+
+<LavaBackground />
 
 # Learn More
 
