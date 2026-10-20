@@ -169,7 +169,14 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+
+const props = defineProps({
+  escala: {
+    type: Number,
+    default: 1,
+  },
+})
 
 const stage = ref(null)
 const scale = ref(0.86)
@@ -180,8 +187,10 @@ function updateScale() {
   const width = stage.value.clientWidth
   const height = stage.value.clientHeight
   if (!width || !height) return
-  scale.value = Math.min(width / 1400, height / 800) * 0.96
+  scale.value = Math.min(width / 1400, height / 800) * 0.96 * props.escala
 }
+
+watch(() => props.escala, updateScale)
 
 onMounted(() => {
   updateScale()

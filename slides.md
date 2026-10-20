@@ -25,7 +25,7 @@ duration: 35min
 
 # LangGraph
 
-by Nataly Jaya 
+Nataly Jaya 
 
 
 
@@ -52,7 +52,7 @@ transition: fade-out
 You can have `style` tag in markdown to override the style for the current page.
 Learn more: https://sli.dev/features/slide-scope-style
 -->
-<AntrophicArchitecture />
+<AntrophicArchitecture :escala="0.75" />
 <style>
 h1 {
   background-color: #2B90B6;
