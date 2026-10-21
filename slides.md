@@ -45,6 +45,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 ---
 layout: blank
 transition: fade-out
+class: h1-gradient
 ---
 
 
@@ -53,17 +54,6 @@ You can have `style` tag in markdown to override the style for the current page.
 Learn more: https://sli.dev/features/slide-scope-style
 -->
 <AntrophicArchitecture :escala="0.75" />
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
 
 <!--
 Here is another comment.
@@ -148,19 +138,6 @@ doubled.value = 2
 <!-- Footer -->
 
 [Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
 
 <!--
 Notes can also sync with clicks
