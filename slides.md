@@ -30,10 +30,8 @@ Nataly Jaya
 
 
 <div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
+  
+  <a href="https://github.com/NatalyJaya/langgraph-exhibition" target="_blank" class="slidev-icon-btn">
     <carbon:logo-github />
   </a>
 </div>
@@ -48,47 +46,36 @@ transition: fade-out
 class: h1-gradient
 ---
 
-
 <!--
 You can have `style` tag in markdown to override the style for the current page.
 Learn more: https://sli.dev/features/slide-scope-style
 -->
-<AntrophicArchitecture :escala="0.75" />
+<AntrophicArchitecture :escala="0.9" />
 
 <!--
 Here is another comment.
 -->
 
 ---
-transition: slide-up
-level: 2
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
 ---
 
-# Navigation
+# How can I build a Multi-Agent System?
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
+---
+layout: blank
+transition: fade-out
+class: h1-gradient
+---
 
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+<CrewAI-vs-Langgraph :escala="1" />
 
 ---
 layout: two-cols
 layoutClass: gap-16
+
 ---
 
 <LavaBackground />

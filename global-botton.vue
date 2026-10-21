@@ -28,9 +28,9 @@
 .lava-bg {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, #FFFFFF, #F8F6F3, #EFECE7, #E4E0DA, #D8D3CB);
+  background: linear-gradient(135deg, #865757, #F8F6F3, #EFECE7, #E4E0DA, #D8D3CB);
   background-size: 300% 300%;
-  animation: bgShift 15s ease infinite;
+  animation: bgShift 100s ease infinite;
   overflow: hidden;
   pointer-events: none;
 }
