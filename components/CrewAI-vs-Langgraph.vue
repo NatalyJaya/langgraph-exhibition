@@ -2,13 +2,13 @@
   <div ref="stage" class="stage">
     <div ref="canvas" class="canvas" :style="{ transform: `translate(-50%, -50%) scale(${scale})` }">
       <div class="panel">
-        <h2 class="caption">Comparativa entre CrewAI i LangGraph</h2>
+        <h2 class="caption">CrewAI vs. LangGraph Comparison</h2>
 
         <div class="table-wrap">
           <table class="compare">
             <thead>
               <tr>
-                <th class="corner">Aspecte</th>
+                <th class="corner">Aspect</th>
                 <th class="head">CrewAI</th>
                 <th class="head">LangGraph</th>
               </tr>
@@ -21,7 +21,7 @@
                 <td class="cell" v-for="(cell, i) in [row.crewai, row.langgraph]" :key="i">
                   <p class="main">{{ cell.text }}</p>
                   <p class="example">
-                    <span class="ex-label">Exemple:</span>
+                    <span class="ex-label">Example:</span>
                     <template v-for="(part, j) in cell.example" :key="j">
                       <code v-if="part.code">{{ part.code }}</code>
                       <span v-else>{{ part }}</span>
@@ -77,60 +77,60 @@ onBeforeUnmount(() => {
 
 const rows = [
   {
-    label: 'Enfocament',
+    label: 'Approach',
     crewai: {
-      text: 'Col·laboració entre múltiples agents',
-      example: ['agents especialitzats que treballen conjuntament'],
+      text: 'Collaboration between multiple agents',
+      example: ['specialized agents working together'],
     },
     langgraph: {
-      text: 'Fluxos de treball multiagent flexibles',
-      example: ['fluxos complexos i dinàmics'],
+      text: 'Flexible multi-agent workflows',
+      example: ['complex and dynamic workflows'],
     },
   },
   {
-    label: 'Execució',
+    label: 'Execution',
     crewai: {
-      text: 'Execució paral·lela de tasques',
+      text: 'Parallel task execution',
       example: [{ code: 'async_execution=True' }],
     },
     langgraph: {
-      text: 'Execució basada en grafs',
-      example: ['branques paral·leles mitjançant arestes (fan-out)'],
+      text: 'Graph-based execution',
+      example: ['parallel branches using edges (fan-out)'],
     },
   },
   {
-    label: "Gestió de l'estat",
+    label: 'State Management',
     crewai: {
-      text: 'Context compartit per l\'equip',
+      text: 'Shared context across the team',
       example: [{ code: 'context=[...]' }],
     },
     langgraph: {
-      text: 'Gestió explícita i persistent de l\'estat',
-      example: [{ code: 'TypedDict' }, ' i estat persistent'],
+      text: 'Explicit and persistent state management',
+      example: [{ code: 'TypedDict' }, ' and persistent state'],
     },
   },
   {
-    label: 'Intervenció humana',
+    label: 'Human Intervention',
     crewai: {
-      text: 'Possible mitjançant interaccions estructurades',
+      text: 'Possible through structured interactions',
       example: [{ code: 'human_input=True' }],
     },
     langgraph: {
-      text: 'Punts de control per a la revisió humana',
-      example: [{ code: 'interrupt()' }, ' i ', 'checkpointer'],
+      text: 'Checkpoints for human review',
+      example: [{ code: 'interrupt()' }, ' and ', { code: 'checkpointer' }],
     },
   },
   {
-    label: 'Cas d\'ús ideal',
+    label: 'Ideal Use Case',
     crewai: {
-      text: 'Equips d\'agents amb rols especialitzats',
-      example: ['disseny basat en ', { code: 'Agent' }, ' i ', { code: 'Task' }],
+      text: 'Agent teams with specialized roles',
+      example: ['design based on ', { code: 'Agent' }, ' and ', { code: 'Task' }],
     },
     langgraph: {
-      text: 'Fluxos complexos i dinàmics',
+      text: 'Complex and dynamic workflows',
       example: [
         { code: 'StateGraph' },
-        ', nodes, arestes, bucles i represa de l\'execució',
+        ', nodes, edges, loops, and execution resumption',
       ],
     },
   },
@@ -180,7 +180,7 @@ const rows = [
 .compare {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 8px;
+  border-spacing: 20px 6px;
   table-layout: fixed;
 }
 
@@ -190,7 +190,7 @@ const rows = [
   text-align: left;
 }
 
-/* Cabeceras */
+/* Headers */
 .corner {
   padding: 0 10px;
   font-size: 16px;
@@ -209,16 +209,18 @@ const rows = [
   border-radius: 6px;
 }
 
-/* Etiquetas de fila */
+/* Row labels */
 .label {
   padding: 12px 10px;
   font-size: 16px;
   font-weight: 700;
   color: #7a7872;
   width: 170px;
+  text-align: center;
+  vertical-align: middle;
 }
 
-/* Celdas */
+/* Cells */
 .cell {
   padding: 12px 16px;
   background: #e4e2dc;
