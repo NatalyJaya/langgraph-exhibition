@@ -2,7 +2,7 @@
   <div ref="stage" class="stage">
     <div
       ref="canvas"
-      :class="['canvas', { 'crewai-only': isCrewAIOnly }]"
+      :class="['canvas', { 'crewai-only': isCrewAIOnly, 'langgraph-only': isLangGraphOnly }]"
       :style="{ transform: canvasTransform }"
     >
       <div class="panel">
@@ -13,8 +13,8 @@
             <thead>
               <tr>
                 <th class="corner">Aspect</th>
-                <th ref="crewHead" class="head" style="view-transition-name: crew-head">CrewAI</th>
-                <th class="head is-langgraph">LangGraph</th>
+                <th ref="crewHead" class="head is-crewai" :style="vtName(0, 'head')">CrewAI</th>
+                <th ref="langHead" class="head is-langgraph" :style="vtName(1, 'head')">LangGraph</th>
               </tr>
             </thead>
 
@@ -25,8 +25,8 @@
                 <td
                   v-for="(cell, i) in [row.crewai, row.langgraph]"
                   :key="i"
-                  :class="['cell', { 'is-langgraph': i === 1 }]"
-                  :style="i === 0 ? { viewTransitionName: `crew-cell-${r}` } : undefined"
+                  :class="['cell', i === 0 ? 'is-crewai' : 'is-langgraph']"
+                  :style="vtName(i, `cell-${r}`)"
                 >
                   <p class="main">{{ cell.text }}</p>
                   <p class="example">
@@ -43,6 +43,15 @@
         </div>
       </div>
     </div>
+
+    <!-- Content shown next to the remaining column (right of CrewAI / left of LangGraph) -->
+    <div
+      v-if="(isCrewAIOnly || isLangGraphOnly) && $slots.default"
+      :class="['side', isLangGraphOnly ? 'side--left' : 'side--right']"
+      :style="sideStyle"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -53,6 +62,10 @@ import { ref } from 'vue'
 // so it reuses the geometry measured by whichever instance is visible.
 const sharedScale = ref(0.9)
 const sharedShift = ref(0)
+const sharedShiftLang = ref(0)
+const sharedColWidth = ref(0)
+const sharedSideTop = ref(0)
+const sharedSideHeight = ref(0)
 </script>
 
 <script setup>
@@ -63,26 +76,51 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
-  // 'full' shows the whole table; 'crewai' keeps only the CrewAI column, moved to the left
+  // 'full' shows the whole table; 'crewai' keeps only the CrewAI column, moved to the left;
+  // 'langgraph' keeps only the LangGraph column, moved to the right
   variant: {
     type: String,
     default: 'full',
   },
 })
 
-// Left margin (px) of the CrewAI column in the 'crewai' variant
+// Distance (px) from the slide edge to the remaining column in the single-column variants
 const LEFT_MARGIN = 48
+const RIGHT_MARGIN = 48
+// Space (px) between the CrewAI column and the side content
+const SIDE_GAP = 32
 
 const isCrewAIOnly = computed(() => props.variant === 'crewai')
+const isLangGraphOnly = computed(() => props.variant === 'langgraph')
+
+// view-transition names pair the same column across slides so it slides instead of fading.
+// A column hidden in this variant gets no name, so it just fades out/in in place.
+const COLUMN_KEYS = ['crew', 'lang']
+function vtName(col, part) {
+  const hidden = col === 0 ? isLangGraphOnly.value : isCrewAIOnly.value
+  return hidden ? undefined : { viewTransitionName: `${COLUMN_KEYS[col]}-${part}` }
+}
 
 const stage = ref(null)
 const canvas = ref(null)
 const table = ref(null)
 const crewHead = ref(null)
+const langHead = ref(null)
 let observer
 
+const sideStyle = computed(() => {
+  const columnSpace = sharedColWidth.value * sharedScale.value + SIDE_GAP
+  return {
+    top: `${sharedSideTop.value}px`,
+    height: `${sharedSideHeight.value}px`,
+    ...(isLangGraphOnly.value
+      ? { right: `${RIGHT_MARGIN + columnSpace}px` }
+      : { left: `${LEFT_MARGIN + columnSpace}px` }),
+  }
+})
+
 const canvasTransform = computed(() => {
-  const shift = isCrewAIOnly.value ? sharedShift.value : 0
+  const shift = isCrewAIOnly.value ? sharedShift.value : isLangGraphOnly.value ? sharedShiftLang.value : 0
   return `translate(calc(-50% + ${shift}px), -50%) scale(${sharedScale.value})`
 })
 
@@ -99,6 +137,21 @@ function updateScale() {
   const colScreenX = width / 2 - (canvasWidth * scale) / 2 + colX * scale
   sharedScale.value = scale
   sharedShift.value = LEFT_MARGIN - colScreenX
+  // Same for the LangGraph column, aligning its right edge to the right margin
+  const langX = table.value.offsetLeft + langHead.value.offsetLeft + langHead.value.offsetWidth
+  const langScreenX = width / 2 - (canvasWidth * scale) / 2 + langX * scale
+  sharedShiftLang.value = width - RIGHT_MARGIN - langScreenX
+  sharedColWidth.value = crewHead.value.offsetWidth
+
+  // Vertical bounds of the CrewAI column, in unscaled stage coordinates
+  // (rects include Slidev's outer scale, so normalize before using them in CSS)
+  const stageRect = stage.value.getBoundingClientRect()
+  const tableRect = table.value.getBoundingClientRect()
+  const outerScale = stageRect.width / width
+  if (tableRect.height && outerScale) {
+    sharedSideTop.value = (tableRect.top - stageRect.top) / outerScale
+    sharedSideHeight.value = tableRect.height / outerScale
+  }
 }
 
 watch(() => props.escala, updateScale)
@@ -203,15 +256,20 @@ const rows = [
   box-sizing: border-box;
 }
 
-/* CrewAI-only variant: same layout, everything but the CrewAI column is hidden */
-.crewai-only .panel {
+/* Single-column variants: same layout, everything but the remaining column is hidden */
+.crewai-only .panel,
+.langgraph-only .panel {
   background: transparent;
 }
 
 .crewai-only .caption,
 .crewai-only .corner,
 .crewai-only .label,
-.crewai-only .is-langgraph {
+.crewai-only .is-langgraph,
+.langgraph-only .caption,
+.langgraph-only .corner,
+.langgraph-only .label,
+.langgraph-only .is-crewai {
   visibility: hidden;
 }
 
@@ -239,6 +297,46 @@ const rows = [
 .compare td {
   vertical-align: top;
   text-align: left;
+}
+
+/* Side content: enters from the right once the CrewAI column has moved */
+.side {
+  position: absolute;
+  display: flex;
+  align-items: stretch;
+  animation: side-in 600ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both;
+}
+
+.side--right {
+  right: 24px;
+  --side-from: 48px;
+}
+
+.side--left {
+  left: 24px;
+  --side-from: -48px;
+}
+
+.side > :deep(*) {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes side-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--side-from));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .side {
+    animation: none;
+  }
 }
 
 /* Headers */

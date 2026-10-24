@@ -64,6 +64,22 @@ class: h1-gradient
 
 # How can I build a Multi-Agent System?
 
+
+---
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
+---
+
+<div class="flex items-center justify-center gap-10 mt-12">
+  <img src="./components/assets/crewai-logo.png" class="w-60 h-60 object-contain" />
+
+  <span class="text-3xl font-bold text-gray-400">VS</span>
+
+  <img src="./components/assets/langgraph-logo.png" class="w-60 h-60 object-contain" />
+</div>
+
+
 ---
 layout: blank
 transition: view-transition
@@ -74,32 +90,43 @@ class: h1-gradient
 
 ---
 layout: blank
+transition: view-transition
+---
+
+<CrewAI-vs-Langgraph :escala="1" variant="crewai">
+  <div v-click>
+    <CrewAIDiagram />
+  </div>
+</CrewAI-vs-Langgraph>
+
+---
+layout: blank
+transition: view-transition
+---
+
+<CrewAI-vs-Langgraph :escala="1" />
+
+---
+layout: blank
 transition: fade-out
 ---
 
-<CrewAI-vs-Langgraph :escala="1" variant="crewai" />
+<CrewAI-vs-Langgraph :escala="1" variant="langgraph">
+  <div v-click>
+    <LangGraphDiagram />
+  </div>
+</CrewAI-vs-Langgraph>
+
 
 ---
-layout: two-cols
-layoutClass: gap-16
-
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
 ---
 
-<LavaBackground />
+# How does LangGraph transform a graph defined by the developer into an executable object? 
+## An analysis of the compile() method
 
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1" />
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc text-sm minDepth="1" maxDepth="2" />
 
 ---
 layout: image-right
