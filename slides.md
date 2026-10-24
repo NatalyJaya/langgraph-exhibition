@@ -16,7 +16,7 @@ class: text-center
 drawings:
   persist: false
 # slide transition: https://sli.dev/guide/animations.html#slide-transitions
-transition: slide-left
+transition: soft-rise | soft-fall
 # enable Comark Syntax: https://comark.dev/syntax/markdown
 comark: true
 # duration of the presentation
@@ -94,102 +94,6 @@ class: h1-gradient
   </ol>
 </div>
 
-<style>
-.toc {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 56px;
-  align-items: center;
-  width: 100%;
-  max-width: 880px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.toc-eyebrow {
-  display: inline-block;
-  margin-bottom: 12px;
-  color: #8f8c85;
-  font-family: 'Inter', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-}
-
-.toc h1 {
-  margin: 0;
-  font-size: clamp(2.6rem, 4.2vw, 3.6rem);
-  line-height: 1.02;
-}
-
-.toc-lead {
-  max-width: 28ch;
-  margin: 18px 0 0;
-  color: #6f6d67;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.toc-meta {
-  margin: 22px 0 0;
-  color: #8f8c85;
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.toc-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.toc-item {
-  display: grid;
-  grid-template-columns: 36px 1fr;
-  gap: 14px;
-  padding: 12px 0;
-  border-top: 1px solid rgba(122, 120, 114, 0.18);
-}
-
-.toc-item:last-child {
-  border-bottom: 1px solid rgba(122, 120, 114, 0.18);
-}
-
-.toc-num {
-  padding-top: 2px;
-  color: #3b4d68;
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-.toc-item h3 {
-  margin: 0 0 3px;
-  color: #3f3d38;
-  font-family: 'Google Sans Flex', sans-serif;
-  font-size: 17px;
-  font-weight: 650;
-  letter-spacing: -0.015em;
-}
-
-.toc-item p {
-  margin: 0;
-  color: #8f8c85;
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.toc-item code {
-  color: #3b4d68;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9em;
-}
-</style>
 
 ---
 layout: blank
@@ -215,7 +119,6 @@ class: h1-gradient
 
 # How can I build a Multi-Agent System?
 
-
 ---
 layout: lava-cover
 transition: fade-out
@@ -229,7 +132,6 @@ class: h1-gradient
 
   <img src="./components/assets/langgraph-logo.png" class="w-60 h-60 object-contain" />
 </div>
-
 
 ---
 layout: blank
@@ -259,7 +161,7 @@ transition: view-transition
 
 ---
 layout: blank
-transition: fade-out
+transition: focus
 ---
 
 <CrewAI-vs-Langgraph :escala="1" variant="langgraph">
@@ -271,7 +173,7 @@ transition: fade-out
 
 ---
 layout: lava-cover
-transition: fade-out
+transition: zoom-in | zoom-out
 class: h1-gradient
 ---
 
@@ -670,4 +572,80 @@ transition: fade-out
 class: h1-gradient
 ---
 
-# Bibliography
+<div class="biblio">
+  <div class="biblio-intro">
+    <span class="biblio-eyebrow">REFERENCES</span>
+    <h1>Bibliography</h1>
+    <p class="biblio-lead">
+      Sources and further reading used throughout this presentation.
+    </p>
+  </div>
+  <ol class="biblio-list">
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        Anthropic. (2025, June 13). <em>How we built our multi-agent research system</em>.
+      </p>
+      <a
+        class="biblio-url"
+        href="https://www.anthropic.com/research/multi-agent-research-system"
+        target="_blank"
+        rel="noreferrer"
+      >https://www.anthropic.com/research/multi-agent-research-system</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        DeepWiki. <em>How does the compile() method work?</em> [Search results].
+      </p>
+      <a
+        class="biblio-url"
+        href="https://deepwiki.com/search/como-funciona-el-metodo-compil_e1551da3-6ba4-400d-90f1-e3030c0729e9"
+        target="_blank"
+        rel="noreferrer"
+      >https://deepwiki.com/search/como-funciona-el-metodo-compil_e1551da3-6ba4-400d-90f1-e3030c0729e9</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        LangChain. <em>langchain-ai/langgraph</em> [GitHub repository].
+      </p>
+      <a
+        class="biblio-url"
+        href="https://github.com/langchain-ai/langgraph"
+        target="_blank"
+        rel="noreferrer"
+      >https://github.com/langchain-ai/langgraph</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        Alejandro AO. (2025, June 19). <em>Anthropic: How to build multi agent systems</em> [Video]. YouTube.
+      </p>
+      <a
+        class="biblio-url"
+        href="https://youtu.be/0HljLKVdtjo?si=uMpA7nDYzHYQZUiQ"
+        target="_blank"
+        rel="noreferrer"
+      >https://youtu.be/0HljLKVdtjo?si=uMpA7nDYzHYQZUiQ</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        TrueFoundry. <em>CrewAI vs. LangGraph: Know the differences</em> [Blog post].
+      </p>
+      <a
+        class="biblio-url"
+        href="https://www.truefoundry.com/blog/crewai-vs-langgraph"
+        target="_blank"
+        rel="noreferrer"
+      >https://www.truefoundry.com/blog/crewai-vs-langgraph</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        Personal-Demo-Multi-Agent-System. <em>Example</em> [Github repository].
+      </p>
+      <a
+        class="biblio-url"
+        href="https://github.com/NatalyJaya/Personal-Demo-Multi-Agent-System"
+        target="_blank"
+        rel="noreferrer"
+      >https://github.com/NatalyJaya/Personal-Demo-Multi-Agent-System</a>
+    </li>
+  </ol>
+</div>
