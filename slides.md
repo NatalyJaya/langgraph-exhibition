@@ -574,4 +574,91 @@ transition: fade-out
 class: h1-gradient
 ---
 
-# Bibliography
+<div class="biblio">
+  <div class="biblio-intro">
+    <span class="biblio-eyebrow">REFERENCES</span>
+    <h1>Bibliography</h1>
+    <p class="biblio-lead">
+      Sources and further reading used throughout this presentation.
+    </p>
+  </div>
+  <ol class="biblio-list">
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        Anthropic. (2025, June 13).
+        <em>How we built our multi-agent research system</em>.
+      </p>
+      <a
+        class="biblio-url"
+        href="https://www.anthropic.com/research/multi-agent-research-system"
+        target="_blank"
+        rel="noreferrer"
+      >https://www.anthropic.com/research/multi-agent-research-system</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        DeepWiki.
+        <em>How does the compile() method work?</em>
+        [Search results].
+      </p>
+      <a
+        class="biblio-url"
+        href="https://deepwiki.com/search/como-funciona-el-metodo-compil_e1551da3-6ba4-400d-90f1-e3030c0729e9"
+        target="_blank"
+        rel="noreferrer"
+      >https://deepwiki.com/search/como-funciona-el-metodo-compil_e1551da3-6ba4-400d-90f1-e3030c0729e9</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        LangChain.
+        <em>langchain-ai/langgraph</em>
+        [GitHub repository].
+      </p>
+      <a
+        class="biblio-url"
+        href="https://github.com/langchain-ai/langgraph"
+        target="_blank"
+        rel="noreferrer"
+      >https://github.com/langchain-ai/langgraph</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        Alejandro AO. (2025, June 19).
+        <em>Anthropic: How to build multi agent systems</em>
+        [Video]. YouTube.
+      </p>
+      <a
+        class="biblio-url"
+        href="https://youtu.be/0HljLKVdtjo?si=uMpA7nDYzHYQZUiQ"
+        target="_blank"
+        rel="noreferrer"
+      >https://youtu.be/0HljLKVdtjo?si=uMpA7nDYzHYQZUiQ</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        TrueFoundry.
+        <em>CrewAI vs. LangGraph: Know the differences</em>
+        [Blog post].
+      </p>
+      <a
+        class="biblio-url"
+        href="https://www.truefoundry.com/blog/crewai-vs-langgraph"
+        target="_blank"
+        rel="noreferrer"
+      >https://www.truefoundry.com/blog/crewai-vs-langgraph</a>
+    </li>
+    <li class="biblio-item">
+      <p class="biblio-cite">
+        Personal-Demo-Multi-Agent-System.
+        <em>Example</em>
+        [GitHub repository].
+      </p>
+      <a
+        class="biblio-url"
+        href="https://github.com/NatalyJaya/Personal-Demo-Multi-Agent-System"
+        target="_blank"
+        rel="noreferrer"
+      >https://github.com/NatalyJaya/Personal-Demo-Multi-Agent-System</a>
+    </li>
+  </ol>
+</div>
