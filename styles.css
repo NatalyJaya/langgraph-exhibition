@@ -230,3 +230,24 @@ code, pre {
 .slidev-layout .biblio .biblio-url:hover {
   text-decoration: underline;
 }
+
+
+.slidev-page::after {
+  content: attr(data-slidev-no) " / 22";
+  position: absolute;
+  left: 28px;
+  bottom: 20px;
+  color: #8f8c85;
+  font-family: 'Inter', sans-serif;
+  font-size: 8.5px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.slidev-page[data-slidev-no="1"]::after {
+  content: none;
+}
