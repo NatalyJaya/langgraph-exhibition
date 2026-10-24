@@ -122,7 +122,7 @@ class: h1-gradient
 
 ---
 layout: lava-cover
-transition: wipe-left | wipe-right
+transition: fade-out
 class: h1-gradient
 ---
 
@@ -133,7 +133,6 @@ class: h1-gradient
 
   <img src="./components/assets/langgraph-logo.png" class="w-60 h-60 object-contain" />
 </div>
-
 
 ---
 layout: blank
