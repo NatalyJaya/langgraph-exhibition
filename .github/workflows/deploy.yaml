@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npx slidev build --base /DigitalTwins-slides/
+      - run: npx slidev build --base /langgraph-exhibition/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
