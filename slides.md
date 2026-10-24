@@ -66,11 +66,18 @@ class: h1-gradient
 
 ---
 layout: blank
-transition: fade-out
+transition: view-transition
 class: h1-gradient
 ---
 
 <CrewAI-vs-Langgraph :escala="1" />
+
+---
+layout: blank
+transition: fade-out
+---
+
+<CrewAI-vs-Langgraph :escala="1" variant="crewai" />
 
 ---
 layout: two-cols
@@ -528,7 +535,7 @@ Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML D
 ---
 foo: bar
 dragPos:
-  square: 691,32,167,_,-16
+  square: -48,0,0,0
 ---
 
 # Draggable Elements

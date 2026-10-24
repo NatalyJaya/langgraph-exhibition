@@ -1,24 +1,33 @@
 <template>
   <div ref="stage" class="stage">
-    <div ref="canvas" class="canvas" :style="{ transform: `translate(-50%, -50%) scale(${scale})` }">
+    <div
+      ref="canvas"
+      :class="['canvas', { 'crewai-only': isCrewAIOnly }]"
+      :style="{ transform: canvasTransform }"
+    >
       <div class="panel">
         <h2 class="caption">CrewAI vs. LangGraph Comparison</h2>
 
         <div class="table-wrap">
-          <table class="compare">
+          <table ref="table" class="compare">
             <thead>
               <tr>
                 <th class="corner">Aspect</th>
-                <th class="head">CrewAI</th>
-                <th class="head">LangGraph</th>
+                <th ref="crewHead" class="head" style="view-transition-name: crew-head">CrewAI</th>
+                <th class="head is-langgraph">LangGraph</th>
               </tr>
             </thead>
 
             <tbody>
-              <tr v-for="row in rows" :key="row.label">
+              <tr v-for="(row, r) in rows" :key="row.label">
                 <th scope="row" class="label">{{ row.label }}</th>
 
-                <td class="cell" v-for="(cell, i) in [row.crewai, row.langgraph]" :key="i">
+                <td
+                  v-for="(cell, i) in [row.crewai, row.langgraph]"
+                  :key="i"
+                  :class="['cell', { 'is-langgraph': i === 1 }]"
+                  :style="i === 0 ? { viewTransitionName: `crew-cell-${r}` } : undefined"
+                >
                   <p class="main">{{ cell.text }}</p>
                   <p class="example">
                     <span class="ex-label">Example:</span>
@@ -37,20 +46,45 @@
   </div>
 </template>
 
+<script>
+import { ref } from 'vue'
+
+// Shared between instances: the next slide is mounted hidden (size 0) by Slidev,
+// so it reuses the geometry measured by whichever instance is visible.
+const sharedScale = ref(0.9)
+const sharedShift = ref(0)
+</script>
+
 <script setup>
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
 
 const props = defineProps({
   escala: {
     type: Number,
     default: 1,
   },
+  // 'full' shows the whole table; 'crewai' keeps only the CrewAI column, moved to the left
+  variant: {
+    type: String,
+    default: 'full',
+  },
 })
+
+// Left margin (px) of the CrewAI column in the 'crewai' variant
+const LEFT_MARGIN = 48
+
+const isCrewAIOnly = computed(() => props.variant === 'crewai')
 
 const stage = ref(null)
 const canvas = ref(null)
-const scale = ref(0.9)
+const table = ref(null)
+const crewHead = ref(null)
 let observer
+
+const canvasTransform = computed(() => {
+  const shift = isCrewAIOnly.value ? sharedShift.value : 0
+  return `translate(calc(-50% + ${shift}px), -50%) scale(${sharedScale.value})`
+})
 
 function updateScale() {
   if (!stage.value || !canvas.value) return
@@ -59,7 +93,12 @@ function updateScale() {
   const canvasWidth = canvas.value.offsetWidth
   const canvasHeight = canvas.value.offsetHeight
   if (!width || !height || !canvasWidth || !canvasHeight) return
-  scale.value = Math.min(width / canvasWidth, height / canvasHeight) * 0.96 * props.escala
+  const scale = Math.min(width / canvasWidth, height / canvasHeight) * 0.96 * props.escala
+  // Where the CrewAI column starts on screen, and how far to move it to reach the left margin
+  const colX = table.value.offsetLeft + crewHead.value.offsetLeft
+  const colScreenX = width / 2 - (canvasWidth * scale) / 2 + colX * scale
+  sharedScale.value = scale
+  sharedShift.value = LEFT_MARGIN - colScreenX
 }
 
 watch(() => props.escala, updateScale)
@@ -164,6 +203,18 @@ const rows = [
   box-sizing: border-box;
 }
 
+/* CrewAI-only variant: same layout, everything but the CrewAI column is hidden */
+.crewai-only .panel {
+  background: transparent;
+}
+
+.crewai-only .caption,
+.crewai-only .corner,
+.crewai-only .label,
+.crewai-only .is-langgraph {
+  visibility: hidden;
+}
+
 .caption {
   margin: 0 0 20px;
   text-align: center;
@@ -254,5 +305,17 @@ code {
   color: #3b4d68;
   padding: 1px 6px;
   border-radius: 4px;
+}
+</style>
+
+<style>
+/* View transition between the full table and the CrewAI-only slide */
+::view-transition-group(*) {
+  animation-duration: 700ms;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+::view-transition-old(root) {
+  animation-duration: 350ms;
 }
 </style>
