@@ -566,6 +566,106 @@ class: h1-gradient
 ---
 
 # Study Conclusions
+## What reading LangGraph's source code taught me
+
+
+---
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
+---
+
+<div class="concl">
+  <div class="concl-intro">
+    <span class="concl-eyebrow">01 · LESSONS LEARNED</span>
+    <h1>What the code taught me</h1>
+    <p class="concl-lead">
+      About the language, the libraries it uses and ideas I can reuse in
+      my own projects.
+    </p>
+  </div>
+
+  <ol class="concl-list">
+    <li v-click class="concl-item">
+      <span class="concl-num">PY</span>
+      <div>
+        <h3>Open Source</h3>
+        <p>Because LangGraph is open source, I could go past the docs and read
+      <code>StateGraph.compile()</code> line by line in
+      <code>langgraph/graph/state.py</code>.</p>
+      </div>
+    </li>
+    <li v-click class="concl-item">
+      <span class="concl-num">LIB</span>
+      <div>
+        <h3>Checkpointers</h3>
+        <p><code>InMemorySaver</code> persists the state after each step.</p>
+      </div>
+    </li>
+    <li v-click class="concl-item">
+      <span class="concl-num">IDEA</span>
+      <div>
+        <h3>Builder → <code>compile()</code></h3>
+        <p>Separate <em>describing</em> a system from <em>executing</em> it: validate once, then run a fixed, optimised object.</p>
+      </div>
+    </li>
+    <li v-click class="concl-item">
+      <span class="concl-num">UNI</span>
+      <div>
+        <h3>Learning</h3>
+        <p>My CS studies have helped me understand the code and choose the right resources and tools to address them.</p>
+      </div>
+    </li>
+  </ol>
+</div>
+
+---
+layout: lava-cover
+transition: fade-out
+class: h1-gradient
+---
+
+<div class="concl">
+  <div class="concl-intro">
+    <span class="concl-eyebrow">02 · AI-ASSISTED ANALYSIS</span>
+    <h1>How I used AI</h1>
+    <p class="concl-lead">
+      Two tools: <strong>DeepWiki (Research mode)</strong> to explore the
+      repository and <strong>Claude Code</strong> to go into detail and build
+      the diagrams and slides.
+    </p>
+  </div>
+
+  <ol class="concl-list">
+    <li v-click class="concl-item">
+      <span class="concl-num">01</span>
+      <div>
+        <h3>Overview · DeepWiki Research</h3>
+        <p>Big picture of the repo and of the compile flow.</p>
+        <p class="concl-prompt">“How does the compile() method work?”</p>
+      </div>
+    </li>
+    <li v-click class="concl-item">
+      <span class="concl-num">02</span>
+      <div>
+        <h3>Detail · Claude Code</h3>
+        <p>Going block by block through <code>compile()</code> and turning each step into a diagram and a slide.</p>
+        <p class="concl-prompt">"Make this diagram easier to understand"</p>
+      </div>
+    </li>
+    <li v-click class="concl-item">
+      <span class="concl-num">03</span>
+      <div>
+        <h3>Verify · DeepWiki + Claude</h3>
+        <p>I kept checking my diagram idea against DeepWiki. The first delivery had mistakes, which I then fixed with Claude.</p>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<!--
+The AI was a guide, not the source of truth: every claim was checked against the real code in the repository.
+-->
 
 ---
 layout: lava-cover
